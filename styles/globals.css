@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button {
+  @apply bg-lime-600 text-white rounded-md mt-6 block px-5 py-3;
+}
