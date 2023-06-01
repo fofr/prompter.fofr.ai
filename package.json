@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "@next/font": "13.0.7",
+    "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.7",
     "flowbite": "^1.6.5",
+    "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "next": "13.0.7",
     "prompt-lists": "^0.0.2",
     "react": "18.2.0",
