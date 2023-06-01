@@ -33,7 +33,9 @@ const PromptForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generate(inputValue);
+    const value = e.target.value;
+    setInputValue(value);
+    generate(value);
   };
 
   return (
