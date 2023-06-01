@@ -51,7 +51,7 @@ const PromptForm = () => {
           Prompt template
         </label>
         <div className="flex">
-          <PromptAutocomplete value={inputValue} onSubmit={handleSubmit} />
+          <PromptAutocomplete value={inputValue} handleChange={handleChange} onSubmit={handleSubmit} />
         </div>
         <button className="button" type="submit">
           Generate

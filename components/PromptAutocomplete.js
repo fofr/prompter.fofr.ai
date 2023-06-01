@@ -16,6 +16,7 @@ class PromptAutocomplete extends Component {
     return (
       <ReactTextareaAutocomplete
         onKeyDown={this.handleKeyDown}
+        onChange={this.props.handleChange}
         id="prompt"
         type="text"
         rows="3"
