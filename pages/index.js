@@ -27,6 +27,8 @@ export default function Home() {
         {title}
       </h1>
 
+      <PromptForm />
+
       {Object.entries(lists).map(([category, categoryLists]) => (
         <div key={category}>
           <h2 className="text-l font-semibold mb-2 mt-4">{category}</h2>
@@ -41,8 +43,6 @@ export default function Home() {
           ))}
         </div>
       ))}
-
-      <PromptForm />
     </div>
   );
 }
