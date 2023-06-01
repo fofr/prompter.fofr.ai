@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
 import PromptPreview from './PromptPreview';
@@ -18,26 +18,25 @@ const PromptForm = () => {
     })
     .then((response) => response.json())
     .then((data) => {
-      setGeneratedPrompt(data)
+      setGeneratedPrompt(data);
     })
     .catch((error) => {
       console.error('Failed to generate:', error);
     });
   };
 
+  // Define debouncedGenerate outside of handleChange
+  const debouncedGenerate = useRef(debounce(generate, 500)).current;
+
   const handleChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-
-    const debouncedGenerate = debounce(generate, 500);
     debouncedGenerate(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const value = e.target.value;
-    setInputValue(value);
-    generate(value);
+    generate(inputValue);
   };
 
   return (
@@ -53,12 +52,11 @@ const PromptForm = () => {
         <div className="flex">
           <PromptAutocomplete value={inputValue} handleChange={handleChange} onSubmit={handleSubmit} />
         </div>
+        <PromptPreview generatedPrompt={generatedPrompt} />
         <button className="button" type="submit">
-          Generate
+          Generate prompts
         </button>
       </form>
-
-      <PromptPreview generatedPrompt={generatedPrompt} />
     </div>
   );
 };
