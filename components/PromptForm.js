@@ -1,4 +1,5 @@
 import React from 'react';
+import PromptAutocomplete from './PromptAutocomplete';
 
 const PromptForm = () => {
   return (
@@ -8,13 +9,7 @@ const PromptForm = () => {
           Prompt template
         </label>
         <div className="flex">
-          <textarea
-            id="prompt"
-            type="text"
-            rows="3"
-            className="flex-grow border-2 border-gray-600 rounded-md p-2"
-            name="prompt"
-          />
+          <PromptAutocomplete />
         </div>
         <button className="button" type="submit">
           Generate
