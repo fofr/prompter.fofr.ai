@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
-import GeneratedPrompts from './GeneratedPrompts';
+import PromptPreview from './PromptPreview';
 
 const PromptForm = () => {
   const [inputValue, setInputValue] = useState('');
@@ -58,7 +58,7 @@ const PromptForm = () => {
         </button>
       </form>
 
-      <GeneratedPrompts generatedPrompt={generatedPrompt} />
+      <PromptPreview generatedPrompt={generatedPrompt} />
     </div>
   );
 };
