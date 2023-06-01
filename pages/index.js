@@ -18,14 +18,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container max-w-2xl mx-auto p-5">
+    <div className="container max-w-3xl p-5">
       <Head>
         <title>{title}</title>
       </Head>
 
-      <h1 className="py-6 text-center font-bold text-2xl">
+      <h1 className="app-prompter-title">
         {title}
       </h1>
+      <p className="text-2xl text-slate-500 mb-8">
+        Generate prompts, share your templates
+      </p>
 
       <PromptForm />
 

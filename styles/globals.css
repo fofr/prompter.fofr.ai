@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  @apply text-7xl font-bold mb-5 text-black;
+  font-family: 'Playfair Display', serif;
+}
+
 .button {
-  @apply bg-lime-600 text-white rounded-md mt-6 block px-5 py-3;
+  @apply bg-black text-white rounded-md mt-6 block px-5 py-3;
 }
 
 .rta__autocomplete {

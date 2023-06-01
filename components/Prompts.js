@@ -7,10 +7,10 @@ const Prompts = ({ generatedPrompts }) => {
 
   return (
     <div className="bg-gray-100 rounded-lg p-6 mt-12">
-      <h2 class="text-2xl font-bold">Prompts</h2>
+      <h2 class="text-4xl mb-4 font-bold playfair">Your prompts</h2>
       <ul>
         {generatedPrompts.map((prompt, index) => (
-          <li key={`${prompt}-${index}`} className="py-2 border-gray-400 border-b">
+          <li key={`${prompt}-${index}`} className="py-3 text-l border-gray-300 border-b">
             <div className="text-m">
               {prompt}
             </div>

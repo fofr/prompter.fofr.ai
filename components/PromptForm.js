@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
 import PromptPreview from './PromptPreview';
@@ -42,6 +42,16 @@ const PromptForm = () => {
     e.preventDefault();
     generate(inputValue, 20);
   };
+
+  const handlePageLoad = () => {
+    const value = 'A film still of [character.fantasy], [interaction.couple], [cinematic.keyword], [cinematic.coloring], [cinematic.effect], set in [time.year]';
+    setInputValue(value);
+    debouncedGenerate(value);
+  };
+
+  useEffect(() => {
+    handlePageLoad();
+  }, []);
 
   return (
     <div>
