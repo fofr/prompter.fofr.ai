@@ -6,9 +6,16 @@ const Item = ({ entity }) => <div>{`${entity}`}</div>;
 const Loading = ({ data }) => <div>Loading</div>;
 
 class PromptAutocomplete extends Component {
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      this.props.onSubmit(e);
+    }
+  }
+
   render() {
     return (
       <ReactTextareaAutocomplete
+        onKeyDown={this.handleKeyDown}
         id="prompt"
         type="text"
         rows="3"

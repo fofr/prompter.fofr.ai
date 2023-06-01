@@ -1,10 +1,4 @@
-import listHelpers from "prompt-lists"
-const allLists = [];
-for (const category of Object.keys(listHelpers)) {
-  for (const listName of Object.keys(listHelpers[category])) {
-    allLists.push(`${category}.${listName}`)
-  }
-}
+import { allLists } from "./_all-lists"
 
 export default async function handler(req, res) {
   const token = req.query.token;
