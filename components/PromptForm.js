@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
+import GeneratedPrompts from './GeneratedPrompts';
 
 const PromptForm = () => {
   const [inputValue, setInputValue] = useState('');
+  const [generatedPrompt, setGeneratedPrompt] = useState('');
 
   // Define the fetch function
   const generate = (nextValue) => {
@@ -16,7 +18,7 @@ const PromptForm = () => {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      setGeneratedPrompt(data)
     })
     .catch((error) => {
       console.error('Failed to generate:', error);
@@ -55,6 +57,8 @@ const PromptForm = () => {
           Generate
         </button>
       </form>
+
+      <GeneratedPrompts generatedPrompt={generatedPrompt} />
     </div>
   );
 };
