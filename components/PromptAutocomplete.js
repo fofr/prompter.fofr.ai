@@ -8,7 +8,8 @@ const Loading = ({ data }) => <div>Loading</div>;
 class PromptAutocomplete extends Component {
   handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      this.props.onSubmit(e);
+      e.preventDefault();
+      this.props.handleChange(e);
     }
   }
 
@@ -19,7 +20,7 @@ class PromptAutocomplete extends Component {
         onChange={this.props.handleChange}
         id="prompt"
         type="text"
-        rows="3"
+        rows="5"
         value={this.props.value}
         className="flex-grow border-2 border-gray-600 rounded-md p-2"
         name="prompt"

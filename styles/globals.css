@@ -17,6 +17,10 @@ h1 {
   @apply bg-black text-white rounded-md mt-6 block px-5 py-3;
 }
 
+.button--secondary {
+  @apply bg-violet-800;
+}
+
 .rta__autocomplete {
   @apply bg-white rounded-md shadow-lg p-2 border-2 border-gray-500;
   overflow: hidden;
