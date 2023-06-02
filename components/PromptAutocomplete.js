@@ -20,7 +20,7 @@ class PromptAutocomplete extends Component {
         id="prompt"
         type="text"
         rows="3"
-        value="A film still of [character.fantasy], [interaction.couple], [cinematic.keyword], [cinematic.coloring], [cinematic.effect], set in [time.year]"
+        value={this.props.value}
         className="flex-grow border-2 border-gray-600 rounded-md p-2"
         name="prompt"
         loadingComponent={Loading}
