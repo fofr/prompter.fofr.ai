@@ -90,7 +90,7 @@ const PromptForm = () => {
           <PromptAutocomplete value={promptTemplate} handleChange={handleChange} />
         </div>
         <PromptPreview promptPreview={promptPreview} />
-        <div className="flex text-center items-center">
+        <div className="flex text-center items-center mt-6">
           <button className="button mr-2 flex-1" type="submit">
             Generate lots
           </button>

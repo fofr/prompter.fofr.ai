@@ -20,7 +20,11 @@ h1 {
 }
 
 .button {
-  @apply bg-black text-white rounded-md mt-6 block px-5 py-3;
+  @apply bg-black text-white rounded-md block px-5 py-3;
+}
+
+.button--green {
+  @apply bg-green-500;
 }
 
 .button--secondary {

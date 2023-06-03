@@ -1,7 +1,7 @@
-import React from 'react';
-import { Fragment, useRef, useEffect, useState } from 'react';
+import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
+import { ClipboardDocumentIcon, DocumentCheckIcon } from '@heroicons/react/24/outline';
 
 export default function Share({ promptTemplate }) {
   const router = useRouter();
@@ -9,6 +9,7 @@ export default function Share({ promptTemplate }) {
   const [isLoadingShare, setIsLoadingShare] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [shareLink, setShareLink] = useState('')
+  const [isCopied, setIsCopied] = useState(false)
 
   const handleShare = async (e) => {
     e.preventDefault();
@@ -16,6 +17,21 @@ export default function Share({ promptTemplate }) {
     await share(promptTemplate);
     setIsModalOpen(true);
     setIsLoadingShare(false);
+  };
+
+  const hideModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 300);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(shareLink).then(function() {
+      setIsCopied(true);
+    }, function() {
+      console.error('Failed to copy text to clipboard');
+    });
   };
 
   const share = async (promptTemplate) => {
@@ -30,7 +46,8 @@ export default function Share({ promptTemplate }) {
       .then((data) => {
         const newUrl = `/?id=${data.id}`;
         router.push(newUrl, newUrl, { shallow: true });
-        setShareLink(`${window.location.origin}${newUrl}`);
+        const fullUrl = `${window.location.origin}${newUrl}`;
+        setShareLink(fullUrl);
       })
       .catch((error) => {
         console.error('Failed to share:', error);
@@ -41,7 +58,7 @@ export default function Share({ promptTemplate }) {
     if (inputRef.current) {
       inputRef.current.select();
     }
-  });
+  }, [isCopied]);
 
   return (
     <div>
@@ -92,16 +109,29 @@ export default function Share({ promptTemplate }) {
                       <Dialog.Title as="h3" className="text-xl pb-2 font-semibold">
                         Copy link
                       </Dialog.Title>
-                      <div className="mt-2">
-                        <input
-                          ref={inputRef}
-                          type="text"
-                          name="share-prompt"
-                          id="share-prompt"
-                          className="rounded-md w-full rounded-md"
-                          value={shareLink}
-                          readOnly={true}
-                        />
+                      <div className="mt-2 flex">
+                        <div className="flex-grow mr-4">
+                          <input
+                            ref={inputRef}
+                            type="text"
+                            name="share-prompt"
+                            id="share-prompt"
+                            className="w-full rounded-md"
+                            value={shareLink}
+                            readOnly={true}
+                          />
+                        </div>
+
+                        {!isCopied && (
+                          <button className="button button--secondary mt-0" onClick={copyToClipboard}>
+                            <ClipboardDocumentIcon className="h-4 w-4 text-color-white" />
+                          </button>
+                        )}
+                        {isCopied && (
+                          <button className="button button--green mt-0 bg-green-600">
+                            <DocumentCheckIcon className="h-4 w-4 text-color-white" disabled />
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -109,10 +139,13 @@ export default function Share({ promptTemplate }) {
                     <button
                       type="button"
                       className="button mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm sm:mt-0 sm:w-auto"
-                      onClick={() => setIsModalOpen(false)}
+                      onClick={hideModal}
                     >
                       Done
                     </button>
+                    <div className={`text-black text-align-r px-4 py-2 rounded ${isCopied ? 'block' : 'hidden'}`}>
+                      Copied to clipboard
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
