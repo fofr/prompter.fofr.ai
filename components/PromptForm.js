@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
 import PromptPreview from './PromptPreview';
@@ -9,6 +10,24 @@ const PromptForm = () => {
   const [promptTemplate, setPromptTemplate] = useState('');
   const [promptPreview, setPromptPreview] = useState('');
   const [generatedPrompts, setGeneratedPrompts] = useState([]);
+  const router = useRouter();
+
+  const getPromptById = async (id) => {
+    const response = await fetch(`/api/${id}`);
+    const data = await response.json();
+
+    if (response.status !== 200) {
+      handleEmptyStart();
+      return;
+    }
+
+    if (data) {
+      setPromptTemplate(data.prompt);
+      debouncedGenerate(data.prompt);
+    } else {
+      handleEmptyStart();
+    }
+  };
 
   const generate = (promptTemplate, count) => {
     fetch('/api/generate', {
@@ -44,10 +63,16 @@ const PromptForm = () => {
     generate(promptTemplate, 20);
   };
 
-  const handlePageLoad = () => {
+  const handleEmptyStart = () => {
     const value = 'A film still of [character.fantasy], [interaction.couple], [cinematic.keyword], [cinematic.coloring], [cinematic.effect], set in [time.year]';
     setPromptTemplate(value);
     debouncedGenerate(value);
+  }
+
+  const handlePageLoad = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
+    id ? getPromptById(id) : handleEmptyStart();
   };
 
   useEffect(() => {
