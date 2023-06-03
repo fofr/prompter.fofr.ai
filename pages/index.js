@@ -24,12 +24,9 @@ export default function Home() {
           <title>{title}</title>
         </Head>
 
-        <h1 className="app-prompter-title text-center">
+        <h1 className="calistoga md:text-8xl text-6xl text-black text-center mb-12">
           {title}
         </h1>
-        <p className="text-2xl font-bold text-center mb-8">
-          Generate prompts and share your templates
-        </p>
 
         <PromptForm />
 

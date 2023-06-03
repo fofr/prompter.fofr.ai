@@ -60,7 +60,7 @@ const PromptForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generate(promptTemplate, 20);
+    generate(promptTemplate, 40);
   };
 
   const handleEmptyStart = () => {
@@ -92,7 +92,7 @@ const PromptForm = () => {
         <PromptPreview promptPreview={promptPreview} />
         <div className="flex text-center items-center mt-6">
           <button className="button mr-2 flex-1" type="submit">
-            Generate lots
+            Generate lots of prompts
           </button>
 
           <Share promptTemplate={promptTemplate} />

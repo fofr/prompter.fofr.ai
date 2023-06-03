@@ -15,7 +15,6 @@ body {
 }
 
 h1 {
-  @apply text-8xl mb-3 text-black;
   font-family: 'Calistoga', serif;
 }
 

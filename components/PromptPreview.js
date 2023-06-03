@@ -6,7 +6,7 @@ const PromptPreview = ({ promptPreview }) => {
   }
 
   return (
-    <div className="bg-orange-100 mt-4 p-4">
+    <div className="bg-amber-50 mt-4 p-4">
       <div className="text-lg">
         <h3 className="font-bold mb-2">Preview:</h3>
         {promptPreview}

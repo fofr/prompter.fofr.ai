@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { ClipboardDocumentIcon, DocumentCheckIcon } from '@heroicons/react/24/outline';
+import { ClipboardDocumentIcon, DocumentCheckIcon } from '@heroicons/react/24/solid';
 
 export default function Share({ promptTemplate }) {
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function Share({ promptTemplate }) {
     <div>
       {!isLoadingShare && (
         <button className="button button--secondary ml-4 h-15" onClick={handleShare}>
-          Share prompt
+          Share template
         </button>
       )}
 
@@ -93,7 +93,7 @@ export default function Share({ promptTemplate }) {
           </Transition.Child>
 
           <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="flex min-h-full items-end justify-center p-4 text-center items-center p-0">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
