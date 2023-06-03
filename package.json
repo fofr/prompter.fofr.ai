@@ -13,7 +13,10 @@
     "test": "npm run lint && npm run build"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@next/font": "13.0.7",
+    "@supabase/supabase-js": "^2.24.0",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.7",

@@ -1,13 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
 import PromptPreview from './PromptPreview';
 import Prompts from './Prompts';
+import Share from './Share';
 
 const PromptForm = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [promptTemplate, setPromptTemplate] = useState('');
   const [promptPreview, setPromptPreview] = useState('');
   const [generatedPrompts, setGeneratedPrompts] = useState([]);
+  const router = useRouter();
+
+  const getPromptById = async (id) => {
+    const response = await fetch(`/api/${id}`);
+    const data = await response.json();
+
+    if (response.status !== 200) {
+      handleEmptyStart();
+      return;
+    }
+
+    if (data) {
+      setPromptTemplate(data.prompt);
+      debouncedGenerate(data.prompt);
+    } else {
+      handleEmptyStart();
+    }
+  };
 
   const generate = (promptTemplate, count) => {
     fetch('/api/generate', {
@@ -34,19 +54,25 @@ const PromptForm = () => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setInputValue(value);
+    setPromptTemplate(value);
     debouncedGenerate(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generate(inputValue, 20);
+    generate(promptTemplate, 40);
   };
 
-  const handlePageLoad = () => {
+  const handleEmptyStart = () => {
     const value = 'A film still of [character.fantasy], [interaction.couple], [cinematic.keyword], [cinematic.coloring], [cinematic.effect], set in [time.year]';
-    setInputValue(value);
+    setPromptTemplate(value);
     debouncedGenerate(value);
+  }
+
+  const handlePageLoad = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
+    id ? getPromptById(id) : handleEmptyStart();
   };
 
   useEffect(() => {
@@ -61,12 +87,16 @@ const PromptForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex">
-          <PromptAutocomplete value={inputValue} handleChange={handleChange} onSubmit={handleSubmit} />
+          <PromptAutocomplete value={promptTemplate} handleChange={handleChange} />
         </div>
         <PromptPreview promptPreview={promptPreview} />
-        <button className="button" type="submit">
-          Generate 20 prompts
-        </button>
+        <div className="flex text-center items-center mt-6">
+          <button className="button mr-2 flex-1" type="submit">
+            Generate lots of prompts
+          </button>
+
+          <Share promptTemplate={promptTemplate} />
+        </div>
 
         <Prompts generatedPrompts={generatedPrompts} />
       </form>

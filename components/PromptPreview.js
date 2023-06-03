@@ -6,12 +6,10 @@ const PromptPreview = ({ promptPreview }) => {
   }
 
   return (
-    <div className="bg-gray-100 rounded-lg p-4">
-      <div>
-        <span className="text-gray-500">Prompt preview</span>
-        <div className="font-bold text-lg">
-          {promptPreview}
-        </div>
+    <div className="bg-amber-50 mt-4 p-4">
+      <div className="text-lg">
+        <h3 className="font-bold mb-2">Preview:</h3>
+        {promptPreview}
       </div>
     </div>
   );

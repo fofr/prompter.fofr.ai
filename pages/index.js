@@ -18,34 +18,33 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container max-w-3xl p-5">
-      <Head>
-        <title>{title}</title>
-      </Head>
+    <div>
+      <div className="container max-w-4xl mx-auto px-8 py-10 bg-white border-black min-h-screen border-r-8 border-l-8 drop-shadow-2xl">
+        <Head>
+          <title>{title}</title>
+        </Head>
 
-      <h1 className="app-prompter-title">
-        {title}
-      </h1>
-      <p className="text-2xl text-slate-500 mb-8">
-        Generate prompts, share your templates
-      </p>
+        <h1 className="calistoga md:text-8xl text-6xl text-black text-center mb-12">
+          {title}
+        </h1>
 
-      <PromptForm />
+        <PromptForm />
 
-      {/* {Object.entries(lists).map(([category, categoryLists]) => (
-        <div key={category}>
-          <h2 className="text-l font-semibold mb-2 mt-4">{category}</h2>
-          {categoryLists.map((list) => (
-            <ul key={list}>
-              <li>
-                <Link href={`/list/${list}`}>
-                  {list}
-                </Link>
-              </li>
-            </ul>
-          ))}
-        </div>
-      ))} */}
+        {/* {Object.entries(lists).map(([category, categoryLists]) => (
+          <div key={category}>
+            <h2 className="text-l font-semibold mb-2 mt-4">{category}</h2>
+            {categoryLists.map((list) => (
+              <ul key={list}>
+                <li>
+                  <Link href={`/list/${list}`}>
+                    {list}
+                  </Link>
+                </li>
+              </ul>
+            ))}
+          </div>
+        ))} */}
+      </div>
     </div>
   );
 }
