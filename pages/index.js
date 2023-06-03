@@ -18,17 +18,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-white to-gray-100 h-screen">
-      <div className="container max-w-3xl mx-auto p-5">
+    <div>
+      <div className="container max-w-4xl mx-auto px-8 py-10 bg-white border-black min-h-screen border-r-8 border-l-8 drop-shadow-2xl">
         <Head>
           <title>{title}</title>
         </Head>
 
-        <h1 className="app-prompter-title">
+        <h1 className="app-prompter-title text-center">
           {title}
         </h1>
-        <p className="text-2xl text-slate-500 mb-8">
-          Generate prompts, share your templates
+        <p className="text-2xl font-bold text-center mb-8">
+          Generate prompts and share your templates
         </p>
 
         <PromptForm />

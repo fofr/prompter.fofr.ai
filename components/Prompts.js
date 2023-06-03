@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const Prompts = ({ generatedPrompts }) => {
+  const promptsRef = useRef(null);
+
+  useEffect(() => {
+    promptsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [generatedPrompts]);
+
   if (!generatedPrompts || generatedPrompts.length === 0) {
     return null;
   }
 
   return (
-    <div className="bg-gray-100 rounded-lg p-6 mt-12">
-      <h2 class="text-2xl mb-4 font-bold">Your prompts</h2>
+    <div ref={promptsRef} className="mt-4 pt-8">
+      <h2 class="text-4xl mb-4 calistoga">Your prompts</h2>
       <ul>
         {generatedPrompts.map((prompt, index) => (
           <li key={`${prompt}-${index}`} className="py-3 text-l border-gray-300 border-b">

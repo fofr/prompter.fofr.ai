@@ -22,7 +22,7 @@ class PromptAutocomplete extends Component {
         type="text"
         rows="5"
         value={this.props.value}
-        className="flex-grow border-2 border-gray-600 rounded-md p-2"
+        className="flex-grow border-2 border-gray-600 p-4"
         name="prompt"
         loadingComponent={Loading}
         ref={rta => {
