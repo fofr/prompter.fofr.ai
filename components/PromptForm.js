@@ -3,30 +3,12 @@ import debounce from 'lodash.debounce';
 import PromptAutocomplete from './PromptAutocomplete';
 import PromptPreview from './PromptPreview';
 import Prompts from './Prompts';
-import ShareModal from './ShareModal';
+import Share from './Share';
 
 const PromptForm = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [promptTemplate, setPromptTemplate] = useState('');
   const [promptPreview, setPromptPreview] = useState('');
   const [generatedPrompts, setGeneratedPrompts] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const share = (promptTemplate) => {
-    fetch('/api/share', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ promptTemplate })
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Failed to share:', error);
-    });
-  };
 
   const generate = (promptTemplate, count) => {
     fetch('/api/generate', {
@@ -53,24 +35,18 @@ const PromptForm = () => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setInputValue(value);
+    setPromptTemplate(value);
     debouncedGenerate(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generate(inputValue, 20);
-  };
-
-  const handleShare = (e) => {
-    e.preventDefault();
-    //share(inputValue);
-    setIsModalOpen(true);
+    generate(promptTemplate, 20);
   };
 
   const handlePageLoad = () => {
     const value = 'A film still of [character.fantasy], [interaction.couple], [cinematic.keyword], [cinematic.coloring], [cinematic.effect], set in [time.year]';
-    setInputValue(value);
+    setPromptTemplate(value);
     debouncedGenerate(value);
   };
 
@@ -86,7 +62,7 @@ const PromptForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex">
-          <PromptAutocomplete value={inputValue} handleChange={handleChange} />
+          <PromptAutocomplete value={promptTemplate} handleChange={handleChange} />
         </div>
         <PromptPreview promptPreview={promptPreview} />
         <div className="flex items-center">
@@ -94,13 +70,10 @@ const PromptForm = () => {
             Generate lots
           </button>
 
-          <button className="button button--secondary ml-4" onClick={handleShare}>
-            Share prompt
-          </button>
+          <Share promptTemplate={promptTemplate} />
         </div>
 
         <Prompts generatedPrompts={generatedPrompts} />
-        <ShareModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </form>
     </div>
   );
