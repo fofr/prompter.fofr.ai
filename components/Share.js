@@ -1,32 +1,40 @@
 import React from 'react';
-import { Fragment, useRef, useEffect, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useRef, useEffect, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useRouter } from 'next/router';
 
 export default function Share({ promptTemplate }) {
+  const router = useRouter();
   const inputRef = useRef(null)
+  const [isLoadingShare, setIsLoadingShare] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [shareLink, setShareLink] = useState('')
 
-  const handleShare = (e) => {
+  const handleShare = async (e) => {
     e.preventDefault();
+    setIsLoadingShare(true);
+    await share(promptTemplate);
     setIsModalOpen(true);
-    share(promptTemplate);
+    setIsLoadingShare(false);
   };
 
-  const share = (promptTemplate) => {
-    fetch('/api/share', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ promptTemplate })
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Failed to share:', error);
-    });
+  const share = async (promptTemplate) => {
+    await fetch('/api/share', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ promptTemplate })
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        const newUrl = `/?id=${data.id}`;
+        router.push(newUrl, newUrl, { shallow: true });
+        setShareLink(`${window.location.origin}${newUrl}`);
+      })
+      .catch((error) => {
+        console.error('Failed to share:', error);
+      });
   };
 
   useEffect(() => {
@@ -37,9 +45,22 @@ export default function Share({ promptTemplate }) {
 
   return (
     <div>
-      <button className="button button--secondary ml-4" onClick={handleShare}>
-        Share prompt
-      </button>
+      {!isLoadingShare && (
+        <button className="button button--secondary ml-4 h-15" onClick={handleShare}>
+          Share prompt
+        </button>
+      )}
+
+      {isLoadingShare && (
+        <button type="button" className="button button--secondary ml-4 inline-flex items-center opacity-50" disabled>
+          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span className="inline-block align-middle">Loading…</span>
+        </button>
+      )}
+
       <Transition.Root show={isModalOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" initialFocus={inputRef} onClose={() => setIsModalOpen(false)}>
           <Transition.Child
@@ -78,7 +99,7 @@ export default function Share({ promptTemplate }) {
                           name="share-prompt"
                           id="share-prompt"
                           className="rounded-md w-full rounded-md"
-                          value="https://prompter.fofr.ai/?1234"
+                          value={shareLink}
                           readOnly={true}
                         />
                       </div>
