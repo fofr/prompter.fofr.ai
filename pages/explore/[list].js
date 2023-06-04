@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
+import Meta from "../../components/Meta";
 
 export default function List() {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function List() {
       <div className="container max-w-4xl mx-auto px-8 py-4 pb-10 bg-white border-black min-h-screen">
         <Head>
           <title>{list.title}</title>
+          <Meta />
         </Head>
 
         <Navbar />

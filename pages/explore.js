@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import Meta from "../components/Meta";
 
 const title = "Explore lists";
 
@@ -23,6 +24,7 @@ export default function Explore() {
       <div className="container max-w-4xl mx-auto px-8 py-4 pb-10 bg-white border-black min-h-screen">
         <Head>
           <title>Explore lists of keywords – Prompter</title>
+          <Meta />
         </Head>
 
         <Navbar />

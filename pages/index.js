@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Link from "next/link";
 import PromptForm from "../components/PromptForm";
 import Navbar from "../components/Navbar";
+import Meta from "../components/Meta";
 const title = "Prompter";
 
 export default function Home() {
@@ -10,6 +10,7 @@ export default function Home() {
       <div className="container max-w-4xl mx-auto px-8 py-4 pb-10 bg-white border-black min-h-screen">
         <Head>
           <title>Prompt generator for AI images and media</title>
+          <Meta />
         </Head>
 
         <Navbar />
