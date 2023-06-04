@@ -14,7 +14,10 @@ export default async function handler(_req, res) {
     const categoryTitle = toTitleCase(category);
     lists[categoryTitle] = [];
     Object.keys(listHelpers[category]).map((key, list) => (
-      lists[categoryTitle].push(toTitleCase(key))
+      lists[categoryTitle].push({
+        title: toTitleCase(key),
+        value: `${category}.${key}`
+      })
     ));
   }
 
