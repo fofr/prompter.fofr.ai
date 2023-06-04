@@ -40,7 +40,7 @@ export default function List() {
 
         <Navbar />
 
-        <Link href="/explore" className="underline">← Back</Link>
+        <Link href="/explore" className="underline">← Back to explore</Link>
 
         <h1 className="calistoga md:text-6xl text-4xl text-black mb-12 pt-10">
           <div className="text-gray-400 text-4xl mb-2">{router.query.list}</div>
@@ -48,7 +48,7 @@ export default function List() {
         </h1>
 
         <p class="mb-4">
-          <span className="text-xl font-bold">{list.length && list.length.toLocaleString()} items</span><br />
+          <span className="text-xl font-bold">{list.count && list.count.toLocaleString()} items</span><br />
           <Link className="text-l underline" href="https://github.com/ai-prompts/prompt-lists">Contribute to this list</Link>
         </p>
 
