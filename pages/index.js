@@ -19,12 +19,26 @@ export default function Home() {
 
   return (
     <div>
-      <div className="container max-w-4xl mx-auto px-8 py-10 bg-white border-black min-h-screen border-r-8 border-l-8 drop-shadow-2xl">
+      <div className="container max-w-4xl mx-auto px-8 py-4 pb-10 bg-white border-black min-h-screen">
         <Head>
-          <title>{title}</title>
+          <title>Prompt generator for AI images and media</title>
         </Head>
 
-        <h1 className="calistoga md:text-8xl text-6xl text-black text-center mb-12">
+        <nav className="mb-8">
+          <ul className="flex justify-center bg-amber-100 -mx-8 -mt-4 p-4 mb-10">
+            <li className="mr-6">
+              <Link href="https://twitter.com/fofrAI" className="underline">Made by @fofrAI</Link>
+            </li>
+            <li className="mr-6">
+              <Link href="/about" className="underline">Explore lists</Link>
+            </li>
+            <li className="mr-6">
+              <Link href="https://github.com/ai-prompts/prompt-lists" className="underline">Contribute</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <h1 className="calistoga md:text-8xl text-6xl text-black text-center mb-12 pt-10">
           {title}
         </h1>
 
