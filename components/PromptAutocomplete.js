@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactTextareaAutocomplete from "@webscopeio/react-textarea-autocomplete";
-import "@webscopeio/react-textarea-autocomplete/style.css";
 
 const Item = ({ entity }) => <div>{`${entity}`}</div>;
 const Loading = ({ data }) => <div>Loading</div>;
@@ -40,7 +39,17 @@ class PromptAutocomplete extends Component {
               return await response.json();
             },
             component: Item,
-            output: (item, trigger) => `${trigger}${item}]`
+            output: (item, trigger) => {
+              const selection = this.textarea.selectionStart;
+              const value = this.textarea.value;
+              const nextChar = value[selection];
+              const text = nextChar === "]" ? `[${item}` : `[${item}]`;
+
+              return {
+                text,
+                caretPosition: "end",
+              }
+            }
           }
         }}
       />
