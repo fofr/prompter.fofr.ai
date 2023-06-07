@@ -42,6 +42,7 @@ const saveTemplate = async (promptTemplate) => {
 export default async function handler(req, res) {
   const promptTemplate = req.body.promptTemplate;
   const count = req.body.count || 1;
+  console.info(`Generating: ${promptTemplate} (${count})`)
   let id = null;
   const generatedPrompts = [];
   for (let i = 0; i < count; i++) {
