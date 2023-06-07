@@ -21,7 +21,7 @@ class PromptAutocomplete extends Component {
         id="prompt"
         type="text"
         rows="5"
-        spellcheck="false"
+        spellCheck="false"
         value={this.props.value}
         className="flex-grow border-2 border-gray-600 p-4"
         name="prompt"

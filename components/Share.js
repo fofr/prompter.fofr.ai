@@ -44,7 +44,7 @@ export default function Share({ promptTemplate }) {
       })
       .then((response) => response.json())
       .then((data) => {
-        const newUrl = `/?id=${data.id}`;
+        const newUrl = `/?id=${data}`;
         router.push(newUrl, newUrl, { shallow: true });
         const fullUrl = `${window.location.origin}${newUrl}`;
         setShareLink(fullUrl);

@@ -1,3 +1,4 @@
+import db from "../../lib/db";
 import { callLists } from "./_all-lists"
 
 const generate = (promptTemplate) => {
@@ -10,13 +11,62 @@ const generate = (promptTemplate) => {
     });
 }
 
+const saveTemplate = async (promptTemplate) => {
+  // Call the stored procedure to increment 'count' and update 'last_used'.
+  const { data: rpcData, error: rpcError } = await db
+    .rpc('increment_template', {
+      tmpl: promptTemplate
+    })
+
+  // If the stored procedure did not affect any rows, insert a new row.
+  if (!rpcData || rpcData.length === 0) {
+    const { data: insertData, error: insertError } = await db
+      .from('generations')
+      .insert({ template: promptTemplate })
+      .select('id')
+
+    if (insertError) {
+      throw new Error(insertError.message);
+    }
+
+    return insertData[0].id;
+  }
+
+  if (rpcError) {
+    throw new Error(rpcError.message);
+  }
+
+  return rpcData;
+}
+
 export default async function handler(req, res) {
   const promptTemplate = req.body.promptTemplate;
   const count = req.body.count || 1;
+  let id = null;
   const generatedPrompts = [];
   for (let i = 0; i < count; i++) {
     generatedPrompts.push(generate(promptTemplate));
   }
 
-  res.status(200).json(generatedPrompts);
+  if (count > 1) {
+    // Create a promise that rejects in <X> milliseconds
+    const timeout = new Promise((_resolve, reject) => {
+      const id = setTimeout(() => {
+        clearTimeout(id);
+        reject(new Error("Timed out"));
+      }, 1000);
+    });
+
+    // Create a promise that saves the template and returns the id
+    const saveTemplatePromise = saveTemplate(promptTemplate);
+
+    try {
+      id = await Promise.race([saveTemplatePromise, timeout]);
+    } catch (error) {
+      console.error('Database operation failed:', error);
+      id = null;
+    }
+  }
+
+  res.status(200).json({ id, prompts: generatedPrompts });
 }

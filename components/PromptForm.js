@@ -22,8 +22,8 @@ const PromptForm = () => {
     }
 
     if (data) {
-      setPromptTemplate(data.prompt);
-      debouncedGenerate(data.prompt);
+      setPromptTemplate(data.promptTemplate);
+      debouncedGenerate(data.promptTemplate);
     } else {
       handleEmptyStart();
     }
@@ -40,9 +40,13 @@ const PromptForm = () => {
     .then((response) => response.json())
     .then((data) => {
       if (count) {
-        setGeneratedPrompts(data)
+        setGeneratedPrompts(data.prompts)
       } else {
-        setPromptPreview(data[0])
+        setPromptPreview(data.prompts[0])
+      }
+
+      if (data.id) {
+        router.push(`?id=${data.id}`, undefined, { shallow: true });
       }
     })
     .catch((error) => {

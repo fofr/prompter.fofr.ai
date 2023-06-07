@@ -9,17 +9,17 @@ export default async function handler(req, res) {
   }
 
   const { data, error } = await db
-    .from('prompts')
-    .select('*')
+    .from('generations')
+    .select('template')
     .eq('id', id)
 
   if (error) {
     return res.status(500).json({ error: error.message });
   }
 
-  if (!data || !data.length) {
+  if (!data) {
     return res.status(404).json({ error: "Not found" });
   }
 
-  res.end(JSON.stringify(data[0]));
+  res.end(JSON.stringify({ promptTemplate: data[0].template }));
 }
