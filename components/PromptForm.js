@@ -90,6 +90,7 @@ const PromptForm = () => {
         onChange={handleChange}
         onSubmit={handleSubmit}
       >
+        <label className="text-lg font-bold mb-4 block mt-6" htmlFor="prompt">Prompt</label>
         <div className="flex">
           <PromptAutocomplete value={promptTemplate} handleChange={handleChange} />
         </div>
