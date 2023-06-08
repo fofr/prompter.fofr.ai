@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactTextareaAutocomplete from "@webscopeio/react-textarea-autocomplete";
+import autocompleteLists from "prompt-lists/lists.json"
 
 const Item = ({ entity }) => <div>{`${entity}`}</div>;
-const Loading = ({ data }) => <div>Loading</div>;
 
 class PromptAutocomplete extends Component {
   handleKeyDown = (e) => {
@@ -24,7 +24,7 @@ class PromptAutocomplete extends Component {
         value={this.props.value}
         className="flex-grow border-2 border-gray-600 p-4"
         name="prompt"
-        loadingComponent={Loading}
+        loadingComponent={() => <span></span>}
         ref={rta => {
           this.rta = rta;
         }}
@@ -34,9 +34,12 @@ class PromptAutocomplete extends Component {
         minChar={0}
         trigger={{
           "[": {
-            dataProvider: async token => {
-              const response = await fetch(`/api/autocomplete?token=${encodeURIComponent(token)}`);
-              return await response.json();
+            dataProvider: token => {
+              const filteredLists = token
+                ? autocompleteLists.filter(list => list.toLowerCase().includes(token.toLowerCase()))
+                : autocompleteLists;
+
+              return filteredLists;
             },
             component: Item,
             output: (item, trigger) => {
