@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ClipboardDocumentIcon, DocumentCheckIcon } from '@heroicons/react/24/solid';
-import { set } from 'lodash';
 
 const Prompts = ({ generatedPrompts }) => {
   const promptsRef = useRef(null);
