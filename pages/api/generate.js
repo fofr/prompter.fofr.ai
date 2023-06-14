@@ -40,8 +40,23 @@ const saveTemplate = async (promptTemplate) => {
 }
 
 export default async function handler(req, res) {
-  const promptTemplate = req.body.promptTemplate;
-  const count = req.body.count || 1;
+  let promptTemplate, count;
+
+  switch (req.method) {
+    case 'POST':
+      promptTemplate = req.body.promptTemplate;
+      count = req.body.count || 1;
+      break;
+    case 'GET':
+      promptTemplate = req.query.promptTemplate;
+      count = req.query.count || 1;
+      break;
+    default:
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
+      return;
+  }
+
   console.info(`Generating: ${promptTemplate} (${count})`)
   let id = null;
   const generatedPrompts = [];
