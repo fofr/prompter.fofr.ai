@@ -57,6 +57,8 @@ export default async function handler(req, res) {
       return;
   }
 
+  count = count > 1000 ? 1000 : count;
+
   console.info(`Generating: ${promptTemplate} (${count})`)
   let id = null;
   const generatedPrompts = [];
