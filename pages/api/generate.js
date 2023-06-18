@@ -4,15 +4,25 @@ import { callLists } from "./_all-lists"
 const generate = (promptTemplate) => {
   return promptTemplate
     .replace(/\[(.*?)\]/g, (_match, listName) => {
+      let listNameParts = listName.split(',');
+      listName = listNameParts[0].trim();
+      let itemCount = listNameParts.length === 2 ? parseInt(listNameParts[1]) : 1;
+      itemCount = isNaN(itemCount) ? 1 : itemCount;
+      itemCount = itemCount > 50 ? 50 : itemCount;
+
       if (listName === 'random') {
-        return getRandomList()(1);
+        let randomItems = [];
+        for (let i = 0; i < itemCount; i++) {
+          randomItems.push(getRandomList()(1));
+        }
+        return randomItems.join(', ');
       }
 
       if (!callLists[listName]) {
         return `[${listName}]`
       }
 
-      return callLists[listName](1);
+      return callLists[listName](itemCount).join(', ');
     });
 }
 
