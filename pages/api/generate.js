@@ -4,11 +4,22 @@ import { callLists } from "./_all-lists"
 const generate = (promptTemplate) => {
   return promptTemplate
     .replace(/\[(.*?)\]/g, (_match, listName) => {
+      if (listName === 'random') {
+        return getRandomList()(1);
+      }
+
       if (!callLists[listName]) {
         return `[${listName}]`
       }
+
       return callLists[listName](1);
     });
+}
+
+const getRandomList = () => {
+  const listNames = Object.keys(callLists);
+  const randomListName = listNames[Math.floor(Math.random() * listNames.length)];
+  return callLists[randomListName];
 }
 
 const saveTemplate = async (promptTemplate) => {

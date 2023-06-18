@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ReactTextareaAutocomplete from "@webscopeio/react-textarea-autocomplete";
 import autocompleteLists from "prompt-lists/lists.json"
 
+autocompleteLists.push("random");
+autocompleteLists.sort();
+
 const Item = ({ entity }) => <div>{`${entity}`}</div>;
 
 class PromptAutocomplete extends Component {
