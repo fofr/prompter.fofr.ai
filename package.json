@@ -21,7 +21,7 @@
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
-    "flowbite": "^1.6.5",
+    "flowbite": "^1.6.6",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "next": "13.4.6",
