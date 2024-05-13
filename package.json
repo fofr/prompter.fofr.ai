@@ -13,7 +13,7 @@
     "test": "npm run lint && npm run build"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.0.18",
     "@next/font": "13.4.19",
     "@supabase/supabase-js": "^2.26.0",
