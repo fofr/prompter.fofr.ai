@@ -16,7 +16,7 @@
     "@headlessui/react": "^2.1.0",
     "@heroicons/react": "^2.0.18",
     "@next/font": "13.4.19",
-    "@supabase/supabase-js": "^2.43.5",
+    "@supabase/supabase-js": "^2.45.2",
     "@vercel/analytics": "^1.3.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "8.54.0",
