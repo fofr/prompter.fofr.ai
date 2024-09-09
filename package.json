@@ -24,7 +24,7 @@
     "flowbite": "^2.3.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
-    "next": "13.4.19",
+    "next": "14.2.8",
     "prompt-lists": "^0.2.11",
     "react": "18.2.0",
     "react-dom": "18.2.0"
