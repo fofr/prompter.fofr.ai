@@ -14,7 +14,12 @@ export default function Share({ promptTemplate }) {
   const handleShare = async (e) => {
     e.preventDefault();
     setIsLoadingShare(true);
-    await share(promptTemplate);
+    
+    const newUrl = `/?template=${encodeURIComponent(promptTemplate)}`;
+    router.push(newUrl, newUrl, { shallow: true });
+    const fullUrl = `${window.location.origin}${newUrl}`;
+    setShareLink(fullUrl);
+    
     setIsModalOpen(true);
     setIsLoadingShare(false);
   };
@@ -34,25 +39,7 @@ export default function Share({ promptTemplate }) {
     });
   };
 
-  const share = async (promptTemplate) => {
-    await fetch('/api/share', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ promptTemplate })
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        const newUrl = `/?id=${data}`;
-        router.push(newUrl, newUrl, { shallow: true });
-        const fullUrl = `${window.location.origin}${newUrl}`;
-        setShareLink(fullUrl);
-      })
-      .catch((error) => {
-        console.error('Failed to share:', error);
-      });
-  };
+
 
   useEffect(() => {
     if (inputRef.current) {

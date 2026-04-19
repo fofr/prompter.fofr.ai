@@ -12,23 +12,6 @@ const PromptForm = () => {
   const [generatedPrompts, setGeneratedPrompts] = useState([]);
   const router = useRouter();
 
-  const getPromptById = async (id) => {
-    const response = await fetch(`/api/${id}`);
-    const data = await response.json();
-
-    if (response.status !== 200) {
-      handleEmptyStart();
-      return;
-    }
-
-    if (data) {
-      setPromptTemplate(data.promptTemplate);
-      debouncedGenerate(data.promptTemplate);
-    } else {
-      handleEmptyStart();
-    }
-  };
-
   const generate = (promptTemplate, count) => {
     fetch('/api/generate', {
       method: 'POST',
@@ -43,10 +26,6 @@ const PromptForm = () => {
         setGeneratedPrompts(data.prompts)
       } else {
         setPromptPreview(data.prompts[0])
-      }
-
-      if (data.id) {
-        router.push(`?id=${data.id}`, undefined, { shallow: true });
       }
     })
     .catch((error) => {
@@ -75,8 +54,14 @@ const PromptForm = () => {
 
   const handlePageLoad = () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id')
-    id ? getPromptById(id) : handleEmptyStart();
+    const template = urlParams.get('template');
+    
+    if (template) {
+      setPromptTemplate(template);
+      debouncedGenerate(template);
+    } else {
+      handleEmptyStart();
+    }
   };
 
   useEffect(() => {
