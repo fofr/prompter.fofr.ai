@@ -5,6 +5,9 @@
   "repository": "https://github.com/ai-prompts/prompter",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
