@@ -6,34 +6,38 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "24.x"
+    "node": ">=24"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test": "npm run lint && npm run build"
   },
   "dependencies": {
-    "@headlessui/react": "^2.1.0",
-    "@heroicons/react": "^2.0.18",
-    "@next/font": "13.4.19",
-    "@vercel/analytics": "^1.3.1",
+    "@headlessui/react": "^2.2.10",
+    "@heroicons/react": "^2.2.0",
+    "@vercel/analytics": "^1.4.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
-    "eslint": "8.54.0",
-    "eslint-config-next": "14.2.3",
-    "flowbite": "^2.3.0",
-    "lodash": "^4.17.21",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.2.9",
+    "flowbite": "^2.5.2",
     "lodash.debounce": "^4.0.8",
-    "next": "13.4.19",
+    "next": "^16.2.9",
     "prompt-lists": "^0.3.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.3.2"
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "@webscopeio/react-textarea-autocomplete": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }

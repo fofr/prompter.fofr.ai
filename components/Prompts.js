@@ -30,6 +30,7 @@ const Prompts = ({ generatedPrompts }) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsCopied(false);
   }, [generatedPrompts]);
 
