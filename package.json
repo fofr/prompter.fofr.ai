@@ -20,7 +20,7 @@
     "@heroicons/react": "^2.2.0",
     "@vercel/analytics": "^2.0.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
-    "eslint": "^9.0.0",
+    "eslint": "^10.5.0",
     "eslint-config-next": "^16.2.9",
     "flowbite": "^2.5.2",
     "lodash.debounce": "^4.0.8",
