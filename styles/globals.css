@@ -1,8 +1,6 @@
-@import "@webscopeio/react-textarea-autocomplete/style.css";
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@webscopeio/react-textarea-autocomplete/style.css";
+@import "tailwindcss";
 
 body {
   background: url('/bg.svg');

@@ -22,7 +22,7 @@
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.2.9",
-    "flowbite": "^2.5.2",
+    "flowbite": "^4.0.2",
     "lodash.debounce": "^4.0.8",
     "next": "^16.2.9",
     "prompt-lists": "^0.3.2",
@@ -30,6 +30,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^4.3.1"
