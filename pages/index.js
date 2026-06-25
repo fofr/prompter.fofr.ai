@@ -24,6 +24,8 @@ export default function Home() {
           <h3 class="font-bold text-lg mb-2">How to write a prompt</h3>
           <p className="mb-2">Try using a ‘[’ character to open a drop-down menu of all available lists, like [animal.all].<br />When you generate prompts, an item is picked from each list, such as giraffe or lion for [animal.all].</p>
           <Link className="underline" href="/explore">Explore the available lists</Link>
+          <span className="mx-2 text-gray-400">·</span>
+          <Link className="underline" href="/json">Craft JSON prompt templates</Link>
         </div>
 
         <PromptForm />
