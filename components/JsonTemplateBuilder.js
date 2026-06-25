@@ -91,6 +91,14 @@ const JsonTemplateBuilder = () => {
     setTimeout(() => setCopied(""), 1200);
   };
 
+  // Copy every variation minified onto its own line (NDJSON), so it drops
+  // straight into batch tools that take one prompt per line.
+  const copyAllLines = () => {
+    navigator.clipboard.writeText(variations.map((v) => JSON.stringify(v)).join("\n"));
+    setCopied("all");
+    setTimeout(() => setCopied(""), 1200);
+  };
+
   return (
     <div>
       <div className="bg-gray-50 border-2 border-gray-200 p-4 mb-6 text-sm">
@@ -212,9 +220,9 @@ const JsonTemplateBuilder = () => {
             <button
               type="button"
               className="button"
-              onClick={() => copy(variations, "all")}
+              onClick={copyAllLines}
             >
-              {copied === "all" ? "Copied!" : "Copy all (array)"}
+              {copied === "all" ? "Copied!" : "Copy all (one per line)"}
             </button>
           </div>
           <div className="grid gap-3 md:grid-cols-2">
