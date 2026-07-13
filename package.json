@@ -21,16 +21,16 @@
     "@vercel/analytics": "^2.0.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.2.9",
+    "eslint-config-next": "^16.2.10",
     "flowbite": "^4.0.2",
     "lodash.debounce": "^4.0.8",
-    "next": "^16.2.9",
+    "next": "^16.2.10",
     "prompt-lists": "^0.4.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.1",
+    "@tailwindcss/postcss": "^4.3.2",
     "autoprefixer": "^10.5.2",
     "postcss": "^8.5.16",
     "tailwindcss": "^4.3.1"
