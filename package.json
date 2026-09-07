@@ -21,10 +21,10 @@
     "@vercel/analytics": "^2.0.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.3.2",
+    "eslint-config-next": "^16.3.3",
     "flowbite": "^4.0.2",
     "lodash.debounce": "^4.0.8",
-    "next": "^16.3.2",
+    "next": "^16.3.3",
     "prompt-lists": "^0.6.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
