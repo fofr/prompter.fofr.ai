@@ -20,11 +20,11 @@
     "@heroicons/react": "^2.2.0",
     "@vercel/analytics": "^2.0.1",
     "@webscopeio/react-textarea-autocomplete": "^4.9.2",
-    "eslint": "^10.9.1",
-    "eslint-config-next": "^16.3.3",
+    "eslint": "^10.10.0",
+    "eslint-config-next": "^16.3.4",
     "flowbite": "^4.0.2",
     "lodash.debounce": "^4.0.8",
-    "next": "^16.3.3",
+    "next": "^16.3.4",
     "prompt-lists": "^0.6.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
@@ -32,8 +32,8 @@
   "devDependencies": {
     "@eslint/compat": "^2.1.1",
     "@tailwindcss/postcss": "^4.3.3",
-    "autoprefixer": "^10.5.4",
-    "postcss": "^8.5.26",
+    "autoprefixer": "^10.5.5",
+    "postcss": "^8.5.28",
     "tailwindcss": "^4.3.1"
   },
   "overrides": {
